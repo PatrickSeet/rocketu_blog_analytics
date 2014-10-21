@@ -1,48 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>My Blog</title>
+    <title>My Blog</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+ <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <link rel="stylesheet" href="css/map.css"/>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <ul class="nav nav-pills pull-right">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'main' %}">Main</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'blog' %}">Blog</a></li>
+        </ul>
+        <h3 class="text-muted">My Blog</h3>
+    </div>
 
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>
-                    <li><a href="{% url 'blog' %}">Blog</a></li>
-                </ul>
-                <h3 class="text-muted">My Blog</h3>
-            </div>
+    <hr>
 
-            <hr>
-
-            <div class="row">
-                <div class="col-md-10">
-                    {% block main %}{% endblock main %}
-                </div>
-
-                <div class="col-md-2">
-                    <div>Blog tags go here!</div>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row">
-                <div class="col-md-12">Latest blog post goes here!</div>
-            </div>
-
-            <hr>
-
-            <div class="footer">
-                <p>&copy; My Blog 2014</p>
-            </div>
+    <div class="row">
+        <div class="col-md-10">
+            {% block main %}{% endblock main %}
         </div>
-    </body>
+
+        <div class="col-md-2">
+            <ul>
+
+                {% for tag in tags_posts %}
+                    <a href="{% url "postwithtags" tag.id %}">{{ tag }} ({{ tag.posts.count }})</a>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-md-6 well">
+            <h3>Checkout our latest post!</h3>
+            <h4>{{ latest_post.title }}</h4>
+
+            <div>by {{ latest_post.author }} on {{ latest_post.created }}</div>
+            <a href="{% url 'post' latest_post.pk %}">Read it!</a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="footer">
+        <p>&copy; My Blog 2014</p>
+
+        <p><a href="{{ ads.ad_url }}"><img src="../media/{{ ads.ad_image }}" width="200px" height="200px"></a></p>
+
+        <div class="pull-right">Welcome user from {{ location.city }}!</div>
+    </div>
+</div>
+</body>
 </html>

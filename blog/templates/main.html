@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-12">
+            <script>var map = L.map('map').setView([51.505, -0.09], 13);
+            </script>
+            <div id="map"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Main</h1>
+
+                <h3>All Pages visited:</h3>
+                <ul>
+                    {% for page in pages %}
+                        <h5>{{ page.url }}</h5>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-6">
+            </div>
+{% endblock main %}
