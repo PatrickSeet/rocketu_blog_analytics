@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     url(r'^blog/(\d+)/$', 'blog.views.post', name='post'),
     url(r'^main/$', 'blog.views.main', name='main'),
     url(r'^postwithtags/(\d+)/$', 'blog.views.postwithtags', name='postwithtags'),
+    url(r'^error/$', 'blog.views.error', name='error'),
+
 )
 if settings.DEBUG:
     urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
