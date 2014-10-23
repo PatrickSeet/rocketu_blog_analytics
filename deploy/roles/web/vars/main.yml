@@ -1,0 +1,9 @@
+---
+
+virtualenv_path: "/home/ubuntu/.virtualenvs/blog_analytics"
+git_repo: https://github.com/PatrickSeet/rocketu_blog_analytics.git
+project_name: rocketu_blog_analytics
+project_path: "/home/ubuntu/{{ project_name }}"
+requirements_file: "{{ project_path }}/requirements.txt"
+program: "gunicorn_rocketu_blog_analytics"
+nginx_server_name: "ec2-54-68-194-87.us-west-2.compute.amazonaws.com"
